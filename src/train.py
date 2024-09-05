@@ -40,7 +40,7 @@ def train_model(train_dir, val_dir, epochs=10):
         restore_best_weights=True
     )
     checkpoint = ModelCheckpoint(
-        'model.h5',
+        'model.keras',
         save_best_only=True
     )
 
