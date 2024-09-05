@@ -28,8 +28,8 @@ def print_invalid_images(directory):
     print(f"Total number of invalid image files: {count}")
 
 # เรียกใช้การตรวจสอบและพิมพ์ชื่อไฟล์ที่ไม่ถูกต้อง
-print_invalid_images('Melonamo/train_data')
-print_invalid_images('Melonamo/validation_data')
+print_invalid_images('Melanoma/train_data')
+print_invalid_images('Melanamo/validation_data')
 
 
 
@@ -83,6 +83,6 @@ def train_model(train_dir, val_dir, epochs=10):
     )
 
 if __name__ == "__main__":
-    train_dir = 'Melonamo/train_data'
-    val_dir = 'Melonamo/validation_data'
+    train_dir = 'Melanoma/train_data'
+    val_dir = 'Melanamo/validation_data'
     train_model(train_dir, val_dir)
