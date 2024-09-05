@@ -6,20 +6,30 @@ import tensorflow as tf
 import os
 from PIL import Image
 
-def print_images_status(directory):
+def print_invalid_images(directory):
+    invalid_images = []
+    count = 0  # นับจำนวนไฟล์ที่ไม่ถูกต้อง
+    
     for subdir, _, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(subdir, file)
             try:
                 img = Image.open(file_path)
                 img.verify()  # ตรวจสอบว่าเป็นไฟล์ภาพที่ถูกต้อง
-                print(f"Valid image file: {file_path}")
             except (IOError, SyntaxError) as e:
-                print(f"Invalid image file: {file_path}")
+                invalid_images.append(file_path)
+                count += 1  # เพิ่มจำนวนไฟล์ที่ไม่ถูกต้อง
 
-# เรียกใช้การตรวจสอบและพิมพ์ชื่อไฟล์ทั้งหมด
-print_images_status('Melonamo_dataset/train_data')
-print_images_status('Melonamo_dataset/validation_data')
+    # พิมพ์รายชื่อไฟล์ที่เสียหายหรือไม่ใช่ภาพ
+    for invalid_image in invalid_images:
+        print(f"Invalid image file: {invalid_image}")
+    
+    # พิมพ์จำนวนไฟล์ที่ไม่ถูกต้อง
+    print(f"Total number of invalid image files: {count}")
+
+# เรียกใช้การตรวจสอบและพิมพ์ชื่อไฟล์ที่ไม่ถูกต้อง
+print_invalid_images('Melonamo_dataset/train_data')
+print_invalid_images('Melonamo_dataset/validation_data')
 
 
 
