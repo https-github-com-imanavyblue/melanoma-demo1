@@ -29,7 +29,7 @@ def print_invalid_images(directory):
 
 # เรียกใช้การตรวจสอบและพิมพ์ชื่อไฟล์ที่ไม่ถูกต้อง
 print_invalid_images('Melanoma/train_data')
-print_invalid_images('Melanamo/validation_data')
+print_invalid_images('Melanoma/validation_data')
 
 
 
@@ -84,5 +84,5 @@ def train_model(train_dir, val_dir, epochs=10):
 
 if __name__ == "__main__":
     train_dir = 'Melanoma/train_data'
-    val_dir = 'Melanamo/validation_data'
+    val_dir = 'Melanoma/validation_data'
     train_model(train_dir, val_dir)
