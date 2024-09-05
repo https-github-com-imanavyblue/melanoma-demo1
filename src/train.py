@@ -6,19 +6,21 @@ import tensorflow as tf
 import os
 from PIL import Image
 
-def validate_images(directory):
+def print_images_status(directory):
     for subdir, _, files in os.walk(directory):
         for file in files:
             file_path = os.path.join(subdir, file)
             try:
-                img = Image.open(file_path)  # พยายามเปิดไฟล์
+                img = Image.open(file_path)
                 img.verify()  # ตรวจสอบว่าเป็นไฟล์ภาพที่ถูกต้อง
+                print(f"Valid image file: {file_path}")
             except (IOError, SyntaxError) as e:
-                print(f"Invalid image file: {file_path}")  # รายงานไฟล์ที่ไม่ใช่ภาพหรือเสียหาย
+                print(f"Invalid image file: {file_path}")
 
-# เรียกใช้การตรวจสอบโฟลเดอร์ train และ val
-validate_images('Melonamo_dataset/train_data')
-validate_images('Melonamo_dataset/validation_data')
+# เรียกใช้การตรวจสอบและพิมพ์ชื่อไฟล์ทั้งหมด
+print_images_status('Melonamo_dataset/train_data')
+print_images_status('Melonamo_dataset/validation_data')
+
 
 
 def train_model(train_dir, val_dir, epochs=10):
