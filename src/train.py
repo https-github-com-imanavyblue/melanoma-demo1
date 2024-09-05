@@ -3,6 +3,24 @@ from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from model import create_model
 import tensorflow as tf
 
+import os
+from PIL import Image
+
+def validate_images(directory):
+    for subdir, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(subdir, file)
+            try:
+                img = Image.open(file_path)  # พยายามเปิดไฟล์
+                img.verify()  # ตรวจสอบว่าเป็นไฟล์ภาพที่ถูกต้อง
+            except (IOError, SyntaxError) as e:
+                print(f"Invalid image file: {file_path}")  # รายงานไฟล์ที่ไม่ใช่ภาพหรือเสียหาย
+
+# เรียกใช้การตรวจสอบโฟลเดอร์ train และ val
+validate_images('Melonamo_dataset/train_data')
+validate_images('Melonamo_dataset/validation_data')
+
+
 def train_model(train_dir, val_dir, epochs=10):
     # Data augmentation and preparation
     train_datagen = ImageDataGenerator(
